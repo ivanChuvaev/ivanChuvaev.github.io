@@ -88,11 +88,11 @@ function addCard(e) {
         return
     }
 
-    const data = {}
-
-    data.name = name.value || ''
-    data.secondName = secondName.value || ''
-    data.email = email.value || ''
+    const data = {
+        name: name.value,
+        secondName: secondName.value,
+        email: email.value,
+    }
 
     storage[email.value] = data
 
