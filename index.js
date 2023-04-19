@@ -7,35 +7,41 @@ const clear = document.querySelector('.clear')
 const users = document.querySelector('.users')
 
 // Объект для localStorage. Если в localStorage есть ключ users,
-// то он записывает в storage, если нет, то создает пустой объект
+// то он записывает в storage, если нет, то создает пустой объект.
 const storage = JSON.parse(localStorage.getItem('users')) || {}
 
 /**
-* Функция добавления слушателей на кнопки удаления и изменения
-* в карточке пользователя
-* @param {HTMLDivElement} userCard - карточка пользователя
-*/
+ * Функция добавления слушателей на кнопки удаления и изменения
+ * в карточке пользователя
+ * @param {HTMLDivElement} userCard - карточка пользователя
+ */
 function setListeners(userCard) {
     const deleteBtn = userCard.querySelector('.delete')
     const changeBtn = userCard.querySelector('.change')
 
     deleteBtn.addEventListener('click', () => {
-        console.log(`%c Удаление пользователя ${deleteBtn.dataset.deleteUserEmail} `, 'background: red; color: white')
+        console.log(
+            `%c Удаление пользователя ${deleteBtn.dataset.deleteUserEmail} `,
+            'background: red; color: white'
+        )
     })
 
     changeBtn.addEventListener('click', () => {
-        console.log(`%c Изменение пользователя ${changeBtn.dataset.changeUserEmail} `, 'background: green; color: white')
+        console.log(
+            `%c Изменение пользователя ${changeBtn.dataset.changeUserEmail} `,
+            'background: green; color: white'
+        )
     })
 }
 
 /**
-* Функция создания карточки пользователя
-* @param {Object} data - объект с данными пользователя
-* @param {string} data.name - имя пользователя
-* @param {string} data.secondName - фамилия пользователя
-* @param {string} data.email - email пользователя
-* @returns {string} - возвращает строку с разметкой карточки пользователя
-*/
+ * Функция создания карточки пользователя
+ * @param {Object} data - объект с данными пользователя
+ * @param {string} data.name - имя пользователя
+ * @param {string} data.secondName - фамилия пользователя
+ * @param {string} data.email - email пользователя
+ * @returns {string} - возвращает строку с разметкой карточки пользователя
+ */
 function createCard({ name, secondName, email }) {
     return `
         <div data-user=${email} class="user-outer">
@@ -53,9 +59,9 @@ function createCard({ name, secondName, email }) {
 }
 
 /**
-* Функция перерисовки карточек пользователей при загрузке страницы
-* @param {Object} storage - объект с данными пользователей
-*/
+ * Функция перерисовки карточек пользователей при загрузке страницы
+ * @param {Object} storage - объект с данными пользователей
+ */
 function rerenderCards(storage) {
     if (!storage) {
         console.log('localStorage пустой')
@@ -75,15 +81,20 @@ function rerenderCards(storage) {
 }
 
 /**
-* Функция добавления карточки пользователя в список пользователей и в localStorage
-* @param {Event} e - событие клика по кнопке добавления
-*/
+ * Функция добавления карточки пользователя в список пользователей и в localStorage
+ * @param {Event} e - событие клика по кнопке добавления
+ */
 function addCard(e) {
     e.preventDefault()
 
     // Если поля name, secondName, email пустые или в storage есть ключ email,
     // то функция ничего не делает
-    if (storage[email.value] || !email.value || !name.value || !secondName.value) {
+    if (
+        storage[email.value] ||
+        !email.value ||
+        !name.value ||
+        !secondName.value
+    ) {
         resetInputs(name, secondName, email)
         return
     }
@@ -108,9 +119,9 @@ function addCard(e) {
 }
 
 /**
-* Функция очистки полей ввода
-* @param {HTMLInputElement} inputs
-*/
+ * Функция очистки полей ввода
+ * @param {HTMLInputElement} inputs
+ */
 function resetInputs(...inputs) {
     inputs.forEach((input) => {
         input.value = ''
