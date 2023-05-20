@@ -18,8 +18,10 @@ function setListeners(userCard) {
     const changeBtn = userCard.querySelector('.change')
 
     deleteBtn.addEventListener('click', () => {
+        const email = deleteBtn.dataset.deleteUserEmail
+        
         console.log(
-            `%c Удаление пользователя ${deleteBtn.dataset.deleteUserEmail} `,
+            `%c Удаление пользователя ${email} `,
             'background: red; color: white',
         )
     })
