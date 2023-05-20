@@ -1,12 +1,7 @@
-const name = document.querySelector('#name')
-const secondName = document.querySelector('#secondName')
-const email = document.querySelector('#email')
-
 const add = document.querySelector('.add')
 const clear = document.querySelector('.clear')
-const users = document.querySelector('.users')
 
-const storage = {}
+const storage = JSON.parse(localStorage.getItem('users')) || {}
 
 /**
  * Функция добавления слушателей на кнопки удаления и изменения
@@ -17,16 +12,18 @@ function setListeners(userCard) {
     const deleteBtn = userCard.querySelector('.delete')
     const changeBtn = userCard.querySelector('.change')
 
+    const userEmail = deleteBtn.dataset.deleteUserEmail
+
     deleteBtn.addEventListener('click', () => {
         console.log(
-            `%c Удаление пользователя ${deleteBtn.dataset.deleteUserEmail} `,
+            `%c Удаление пользователя ${userEmail} `,
             'background: red; color: white',
         )
     })
 
     changeBtn.addEventListener('click', () => {
         console.log(
-            `%c Изменение пользователя ${changeBtn.dataset.changeUserEmail} `,
+            `%c Изменение пользователя ${userEmail} `,
             'background: green; color: white',
         )
     })
@@ -61,6 +58,8 @@ function createCard({ name, secondName, email }) {
  * @param {Object} storage - объект с данными пользователей
  */
 function rerenderCards(storage) {
+    const users = document.querySelector('.users')
+
     if (!storage) {
         console.log('localStorage пустой')
         return
@@ -72,6 +71,7 @@ function rerenderCards(storage) {
         const userData = storage[email]
         const userCard = document.createElement('div')
         userCard.className = 'user'
+        userCard.dataset.email = email
         userCard.innerHTML = createCard(userData)
         users.append(userCard)
         setListeners(userCard)
@@ -84,36 +84,39 @@ function rerenderCards(storage) {
  */
 function addCard(e) {
     e.preventDefault()
+    const newName = document.querySelector('#name')
+    const newSecondName = document.querySelector('#secondName')
+    const newEmail = document.querySelector('#email')
 
-    // Если поля name, secondName, email пустые или в storage есть ключ email,
-    // то функция ничего не делает
-    if (
-        storage[email.value]
-        || !email.value
-        || !name.value
-        || !secondName.value
+    const users = document.querySelector('.users')
+
+    if (!newEmail.value
+        || !newName.value
+        || !newSecondName.value
     ) {
-        resetInputs(name, secondName, email)
+        resetInputs(newName, newSecondName, newEmail)
         return
     }
 
     const data = {
-        name: name.value,
-        secondName: secondName.value,
-        email: email.value,
+        name: newName.value,
+        secondName: newSecondName.value,
+        email: newEmail.value,
     }
 
-    storage[email.value] = data
+    storage[newEmail.value] = data
 
     const userCard = document.createElement('div')
     userCard.className = 'user'
+    userCard.dataset.email = newEmail
     users.append(userCard)
     setListeners(userCard)
 
     // Добавление данных в localStorage
     localStorage.setItem('users', JSON.stringify(storage))
-    console.log(`localStorage: ${JSON.stringify(storage)}`)
-    resetInputs(name, secondName, email)
+    resetInputs(newName, newSecondName, newEmail)
+
+    console.log(storage)
 }
 
 /**
