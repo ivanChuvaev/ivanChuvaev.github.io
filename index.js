@@ -11,6 +11,8 @@ const storage = JSON.parse(localStorage.getItem('users')) || {}
 function setListeners(userCard) {
     const deleteBtn = userCard.querySelector('.delete')
     const changeBtn = userCard.querySelector('.change')
+    
+    const userEmail = deleteBtn.dataset.deleteUserEmail
 
     const userEmail = deleteBtn.dataset.deleteUserEmail
 
