@@ -6,7 +6,7 @@ const add = document.querySelector('.add')
 const clear = document.querySelector('.clear')
 const users = document.querySelector('.users')
 
-const storage = {}
+const storage = JSON.parse(localStorage.getItem('users')) || {}
 
 /**
  * Функция добавления слушателей на кнопки удаления и изменения
