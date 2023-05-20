@@ -110,7 +110,7 @@ function addCard(e) {
 
     const userCard = document.createElement('div')
     userCard.className = 'user'
-    userCard.dataset.email = newEmail
+    userCard.dataset.email = newEmail.value
     users.append(userCard)
     setListeners(userCard)
 
