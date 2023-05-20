@@ -8,7 +8,7 @@ const users = document.querySelector('.users')
 
 // Объект для localStorage. Если в localStorage есть ключ users,
 // то он записывает в storage, если нет, то создает пустой объект.
-const storage = JSON.parse(localStorage.getItem('users')) || {}
+const storage = {}
 
 /**
  * Функция добавления слушателей на кнопки удаления и изменения
@@ -22,14 +22,14 @@ function setListeners(userCard) {
     deleteBtn.addEventListener('click', () => {
         console.log(
             `%c Удаление пользователя ${deleteBtn.dataset.deleteUserEmail} `,
-            'background: red; color: white'
+            'background: red; color: white',
         )
     })
 
     changeBtn.addEventListener('click', () => {
         console.log(
             `%c Изменение пользователя ${changeBtn.dataset.changeUserEmail} `,
-            'background: green; color: white'
+            'background: green; color: white',
         )
     })
 }
@@ -90,10 +90,10 @@ function addCard(e) {
     // Если поля name, secondName, email пустые или в storage есть ключ email,
     // то функция ничего не делает
     if (
-        storage[email.value] ||
-        !email.value ||
-        !name.value ||
-        !secondName.value
+        storage[email.value]
+        || !email.value
+        || !name.value
+        || !secondName.value
     ) {
         resetInputs(name, secondName, email)
         return
