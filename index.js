@@ -14,8 +14,6 @@ function setListeners(userCard) {
     
     const userEmail = deleteBtn.dataset.deleteUserEmail
 
-    const userEmail = deleteBtn.dataset.deleteUserEmail
-
     deleteBtn.addEventListener('click', () => {
         console.log(
             `%c Удаление пользователя ${userEmail} `,
