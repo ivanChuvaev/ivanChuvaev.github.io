@@ -6,8 +6,6 @@ const add = document.querySelector('.add')
 const clear = document.querySelector('.clear')
 const users = document.querySelector('.users')
 
-// Объект для localStorage. Если в localStorage есть ключ users,
-// то он записывает в storage, если нет, то создает пустой объект.
 const storage = {}
 
 /**
