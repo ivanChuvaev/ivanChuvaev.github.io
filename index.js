@@ -16,19 +16,19 @@ const storage = JSON.parse(localStorage.getItem('users')) || {}
 function setListeners(userCard) {
     const deleteBtn = userCard.querySelector('.delete')
     const changeBtn = userCard.querySelector('.change')
+    
+    const userEmail = deleteBtn.dataset.deleteUserEmail
 
     deleteBtn.addEventListener('click', () => {
-        const email = deleteBtn.dataset.deleteUserEmail
-        
         console.log(
-            `%c Удаление пользователя ${email} `,
+            `%c Удаление пользователя ${userEmail} `,
             'background: red; color: white',
         )
     })
 
     changeBtn.addEventListener('click', () => {
         console.log(
-            `%c Изменение пользователя ${changeBtn.dataset.changeUserEmail} `,
+            `%c Изменение пользователя ${userEmail} `,
             'background: green; color: white',
         )
     })
