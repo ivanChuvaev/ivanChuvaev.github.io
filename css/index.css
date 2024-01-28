@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: monospace;
     margin: 0;
     padding: 0;
 }
@@ -24,12 +25,12 @@ form {
     width: 50vw;
 }
 
-input {
+input, select {
     display: block;
     height: 30px;
 }
 
-input:not(:last-child) {
+input:not(:last-child), select:not(:last-child) {
     margin-bottom: 10px;
 }
 
@@ -102,4 +103,15 @@ input:not(:last-child) {
 .delete:active,
 .change:active {
     transform: scale(0.95);
+}
+
+
+.you-stupid-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.you-stupid-buttons > *:first-child {
+    margin: 0;
 }

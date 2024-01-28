@@ -30,6 +30,7 @@ function setListeners(userCard) {
         document.querySelector('#name').value = user.name; 
         document.querySelector('#secondName').value = user.secondName;
         document.querySelector('#email').value = user.email;
+        document.querySelector('#you-stupid').value = user.youStupid;
         console.log(
             `%c Изменение пользователя ${userEmail} `,
             'background: green; color: white',
@@ -45,13 +46,14 @@ function setListeners(userCard) {
  * @param {string} data.email - email пользователя
  * @returns {string} - возвращает строку с разметкой карточки пользователя
  */
-function createCard({ name, secondName, email }) {
+function createCard({ name, secondName, email, youStupid }) {
     return `
         <div data-user=${email} class="user-outer">
             <div class="user-info">
                 <p>${name}</p>
                 <p>${secondName}</p>
                 <p class="email">${email}</p>
+                <p>${youStupid}</p>
             </div>
             <div class="menu">
                 <button data-delete-user-email=${email} class="delete">Удалить</button>
@@ -95,6 +97,7 @@ function addCard(e) {
     const newName = document.querySelector('#name')
     const newSecondName = document.querySelector('#secondName')
     const newEmail = document.querySelector('#email')
+    const newYouStupid = document.querySelector('#you-stupid')
 
     const users = document.querySelector('.users')
 
@@ -110,9 +113,10 @@ function addCard(e) {
         name: newName.value,
         secondName: newSecondName.value,
         email: newEmail.value,
+        youStupid: newYouStupid.value
     }
 
-    const storage = JSON.parse(localStorage.getItem("users"));
+    const storage = JSON.parse(localStorage.getItem("users")) || {};
 
     const exist = data.email in storage;
 
