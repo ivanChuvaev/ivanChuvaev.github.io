@@ -26,6 +26,10 @@ function setListeners(userCard) {
     })
 
     changeBtn.addEventListener('click', () => {
+        const user = JSON.parse(localStorage.getItem("users"))[userEmail];
+        document.querySelector('#name').value = user.name; 
+        document.querySelector('#secondName').value = user.secondName;
+        document.querySelector('#email').value = user.email;
         console.log(
             `%c Изменение пользователя ${userEmail} `,
             'background: green; color: white',
@@ -108,17 +112,29 @@ function addCard(e) {
         email: newEmail.value,
     }
 
-    storage[newEmail.value] = data
+    const storage = JSON.parse(localStorage.getItem("users"));
 
-    const userCard = document.createElement('div')
-    userCard.className = 'user'
-    userCard.dataset.email = newEmail.value
-    userCard.innerHTML = createCard(data)
-    users.append(userCard)
-    setListeners(userCard)
+    const exist = data.email in storage;
 
+    if (exist) {
+        storage[newEmail.value] = data;
+    } else {
+        storage[newEmail.value] = data;
+        const userCard = document.createElement('div')
+        userCard.className = 'user'
+        userCard.dataset.email = newEmail.value
+        userCard.innerHTML = createCard(data)
+        users.append(userCard)
+        setListeners(userCard)
+    }
+    
     // Добавление данных в localStorage
     localStorage.setItem('users', JSON.stringify(storage))
+
+    if (exist) {
+        rerenderCards(storage);
+    }
+
     resetInputs(newName, newSecondName, newEmail)
 
     console.log(storage)
