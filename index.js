@@ -15,6 +15,10 @@ function setListeners(userCard) {
     const userEmail = deleteBtn.dataset.deleteUserEmail
 
     deleteBtn.addEventListener('click', () => {
+        const storage = JSON.parse(localStorage.getItem("users"));
+        delete storage[userEmail];
+        localStorage.setItem("users", JSON.stringify(storage));
+        rerenderCards(storage);
         console.log(
             `%c Удаление пользователя ${userEmail} `,
             'background: red; color: white',
